@@ -1,104 +1,79 @@
-/* styles.css */
+// script.js
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const jsonInput = document.getElementById('jsonInput');
+    const jsonOutput = document.getElementById('jsonOutput');
+    const formatBtn = document.getElementById('formatBtn');
+    const validateBtn = document.getElementById('validateBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const message = document.getElementById('message');
 
-.container {
-    max-width: 1200px; /* Increased width for better side-by-side display */
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+    // Function to format JSON
+    const formatJSON = () => {
+        const input = jsonInput.value.trim();
+        if (!input) {
+            showMessage('Input is empty!', true);
+            return;
+        }
+        try {
+            const parsed = JSON.parse(input);
+            const formatted = JSON.stringify(parsed, null, 4);
+            jsonOutput.value = formatted;
+            showMessage('JSON formatted successfully!', false);
+        } catch (error) {
+            showMessage(`Error: ${error.message}`, true);
+        }
+    };
 
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-}
+    // Function to validate JSON
+    const validateJSON = () => {
+        const input = jsonInput.value.trim();
+        if (!input) {
+            showMessage('Input is empty!', true);
+            return;
+        }
+        try {
+            JSON.parse(input);
+            showMessage('Valid JSON!', false);
+        } catch (error) {
+            showMessage(`Invalid JSON: ${error.message}`, true);
+        }
+    };
 
-.editor-container {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-}
+    // Function to clear input and output
+    const clearFields = () => {
+        jsonInput.value = '';
+        jsonOutput.value = '';
+        message.textContent = '';
+    };
 
-.editor {
-    flex: 1; /* Equal width for both editors */
-    display: flex;
-    flex-direction: column;
-}
+    // Function to copy output to clipboard
+    const copyToClipboard = () => {
+        const output = jsonOutput.value;
+        if (!output) {
+            showMessage('Nothing to copy!', true);
+            return;
+        }
+        navigator.clipboard.writeText(output).then(() => {
+            showMessage('Copied to clipboard!', false);
+        }).catch(err => {
+            showMessage('Failed to copy!', true);
+        });
+    };
 
-.editor h2 {
-    margin-bottom: 10px;
-    color: #555;
-}
+    // Function to show messages
+    const showMessage = (msg, isError) => {
+        message.textContent = msg;
+        message.style.color = isError ? '#d9534f' : '#28a745'; // Red for errors, green for success
+        setTimeout(() => {
+            message.textContent = '';
+        }, 3000);
+    };
 
-textarea {
-    width: 100%;
-    height: 300px; /* Increased height for better usability */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-    font-family: monospace;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.buttons {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    background-color: #007BFF;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#message {
-    text-align: center;
-    font-size: 14px;
-    color: #d9534f; /* Red color for errors */
-}
-
-/* Responsive Design */
-@media (max-width: 800px) {
-    .editor-container {
-        flex-direction: column;
-    }
-
-    textarea {
-        height: 250px;
-    }
-}
-
-@media (max-width: 500px) {
-    .container {
-        margin: 20px;
-    }
-
-    button {
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    textarea {
-        height: 200px;
-    }
-}
+    // Event Listeners
+    formatBtn.addEventListener('click', formatJSON);
+    validateBtn.addEventListener('click', validateJSON);
+    clearBtn.addEventListener('click', clearFields);
+    copyBtn.addEventListener('click', copyToClipboard);
+});
