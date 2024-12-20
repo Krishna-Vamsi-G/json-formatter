@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copyBtn');
     const message = document.getElementById('message');
 
+    // Modal Elements
+    const modal = document.getElementById('modal');
+    const modalOutput = document.getElementById('modalOutput');
+    const closeModal = document.getElementById('closeModal');
+
     // Function to display messages
     const showMessage = (msg, isError) => {
         message.textContent = msg;
@@ -30,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formatted = JSON.stringify(parsed, null, 4);
             jsonOutput.value = formatted;
             showMessage('JSON formatted successfully!', false);
+            openModal(formatted);
         } catch (error) {
             showMessage(`Error: ${error.message}`, true);
         }
@@ -71,9 +77,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Function to open modal with formatted JSON
+    const openModal = (formattedJSON) => {
+        modalOutput.value = formattedJSON;
+        modal.style.display = 'block';
+        modalOutput.focus();
+    };
+
+    // Function to close modal
+    const closeModalFunc = () => {
+        modal.style.display = 'none';
+    };
+
     // Event Listeners
     formatBtn.addEventListener('click', formatJSON);
     validateBtn.addEventListener('click', validateJSON);
     clearBtn.addEventListener('click', clearFields);
     copyBtn.addEventListener('click', copyToClipboard);
+    closeModal.addEventListener('click', closeModalFunc);
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModalFunc();
+        }
+    });
+
+    // Close modal on Escape key
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.style.display === 'block') {
+            closeModalFunc();
+        }
+    });
 });
