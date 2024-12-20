@@ -9,6 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copyBtn');
     const message = document.getElementById('message');
 
+    // Function to display messages
+    const showMessage = (msg, isError) => {
+        message.textContent = msg;
+        message.style.color = isError ? '#d9534f' : '#28a745'; // Red for errors, green for success
+        setTimeout(() => {
+            message.textContent = '';
+        }, 3000);
+    };
+
     // Function to format JSON
     const formatJSON = () => {
         const input = jsonInput.value.trim();
@@ -57,18 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         navigator.clipboard.writeText(output).then(() => {
             showMessage('Copied to clipboard!', false);
-        }).catch(err => {
+        }).catch(() => {
             showMessage('Failed to copy!', true);
         });
-    };
-
-    // Function to show messages
-    const showMessage = (msg, isError) => {
-        message.textContent = msg;
-        message.style.color = isError ? '#d9534f' : '#28a745'; // Red for errors, green for success
-        setTimeout(() => {
-            message.textContent = '';
-        }, 3000);
     };
 
     // Event Listeners
