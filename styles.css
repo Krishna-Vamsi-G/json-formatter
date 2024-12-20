@@ -27,8 +27,39 @@ body {
 /* Header Styling */
 h1 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     color: #333;
+}
+
+/* Buttons Section */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+/* Button Styling */
+.buttons button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 100px;
+}
+
+.buttons button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: translateY(0);
 }
 
 /* Main Content Layout */
@@ -48,7 +79,6 @@ h1 {
     min-width: 250px;
 }
 
-/* Editor Headings */
 .editor h2 {
     margin-bottom: 10px;
     color: #555;
@@ -68,44 +98,13 @@ textarea {
     line-height: 1.5;
     background-color: #f9f9f9;
     transition: background-color 0.3s ease;
+    overflow: auto;
 }
 
 textarea:focus {
     background-color: #e8f0fe;
     outline: none;
     border-color: #007BFF;
-}
-
-/* Buttons Section */
-.buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    min-width: 150px;
-}
-
-/* Button Styling */
-.buttons button {
-    width: 120px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #007BFF;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.buttons button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-.buttons button:active {
-    transform: translateY(0);
 }
 
 /* Message Display */
@@ -128,6 +127,68 @@ textarea:focus {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap; /* Prevent text wrapping */
     border: 0;
+}
+
+/* Fullscreen Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-content textarea {
+    width: 100%;
+    height: 60vh;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #f9f9f9;
+    overflow: auto;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* Responsive Design */
@@ -166,5 +227,9 @@ textarea:focus {
 
     textarea {
         height: 200px;
+    }
+
+    .modal-content textarea {
+        height: 50vh;
     }
 }
