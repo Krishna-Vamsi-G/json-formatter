@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const openModal = (formattedJSON) => {
         modalOutput.value = formattedJSON;
         modal.style.display = 'block';
-        modalOutput.focus();
+        modalOutput.focus(); // Focus the textarea to enable find functionality
     };
 
     // Function to close modal
