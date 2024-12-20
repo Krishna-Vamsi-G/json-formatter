@@ -10,20 +10,21 @@
 <body>
     <div class="container">
         <h1>Simple JSON Formatter</h1>
+        
+        <!-- Buttons Section -->
+        <div class="buttons">
+            <button id="formatBtn" aria-label="Format JSON">Format</button>
+            <button id="validateBtn" aria-label="Validate JSON">Validate</button>
+            <button id="clearBtn" aria-label="Clear Fields">Clear</button>
+            <button id="copyBtn" aria-label="Copy Formatted JSON">Copy</button>
+        </div>
+        
         <div class="main-content">
             <!-- Input JSON Section -->
             <div class="editor">
                 <h2>Input JSON</h2>
                 <label for="jsonInput" class="visually-hidden">Input JSON</label>
                 <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
-            </div>
-
-            <!-- Buttons Section -->
-            <div class="buttons">
-                <button id="formatBtn" aria-label="Format JSON">Format</button>
-                <button id="validateBtn" aria-label="Validate JSON">Validate</button>
-                <button id="clearBtn" aria-label="Clear Fields">Clear</button>
-                <button id="copyBtn" aria-label="Copy Formatted JSON">Copy</button>
             </div>
 
             <!-- Formatted JSON Section -->
@@ -33,7 +34,17 @@
                 <textarea id="jsonOutput" placeholder="Formatted JSON will appear here..." readonly></textarea>
             </div>
         </div>
+        
         <div id="message"></div>
+    </div>
+
+    <!-- Fullscreen Modal for Formatted JSON -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Formatted JSON</h2>
+            <textarea id="modalOutput" readonly></textarea>
+        </div>
     </div>
 
     <script src="script.js"></script>
