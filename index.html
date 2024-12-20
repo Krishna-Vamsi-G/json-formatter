@@ -10,21 +10,23 @@
 <body>
     <div class="container">
         <h1>JSON Formatter</h1>
-        <div class="editor-container">
+        <div class="main-content">
             <div class="editor">
                 <h2>Input JSON</h2>
+                <label for="jsonInput" class="visually-hidden">Input JSON</label>
                 <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+            </div>
+            <div class="buttons">
+                <button id="formatBtn" aria-label="Format JSON">Format</button>
+                <button id="validateBtn" aria-label="Validate JSON">Validate</button>
+                <button id="clearBtn" aria-label="Clear Fields">Clear</button>
+                <button id="copyBtn" aria-label="Copy Formatted JSON">Copy</button>
             </div>
             <div class="editor">
                 <h2>Formatted JSON</h2>
+                <label for="jsonOutput" class="visually-hidden">Formatted JSON</label>
                 <textarea id="jsonOutput" placeholder="Formatted JSON will appear here..." readonly></textarea>
             </div>
-        </div>
-        <div class="buttons">
-            <button id="formatBtn">Format</button>
-            <button id="validateBtn">Validate</button>
-            <button id="clearBtn">Clear</button>
-            <button id="copyBtn">Copy</button>
         </div>
         <div id="message"></div>
     </div>
